@@ -1,0 +1,69 @@
+﻿@model IEnumerable<AppProducts.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card-header  ml-0 row container mb-3">
+    <div class="col-6">
+        <h1>Products</h1>
+    </div>
+    <div class="col-6 text-right mt-1">
+        <a asp-action="Create" class="btn btn-info "> Create New</a>
+    </div>
+</div>
+<div class="row m-0 p-0 pb-3">
+    <div class="col-2"> <a asp-action="Index" asp-route-id="Name" class="btn btn-block btn-info shadow">By Name</a></div>
+    <div class="col-2"> <a asp-action="Index" asp-route-id="Date" class="btn btn-block btn-info shadow">By Date</a></div>
+    <div class="col-2"> <a asp-action="Index" asp-route-id="Price" class="btn btn-block btn-info shadow">By Price</a></div>
+    <div class="col-3"> <a asp-action="Index" asp-route-id="Created5" class="btn btn-block btn-info shadow">Created < 5 days</a></div>
+    <div class="col-3"> <a asp-action="Index" asp-route-id="Deleted10" class="btn btn-block btn-info shadow">Deleted < 10 days</a></div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+
+                @if (item.IsDeleted == false)
+                {
+                    <td>
+                        <a class="btn btn-success btn-sm" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <div class="text-danger">Product is not available</div>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,25 @@
+﻿@model AppProducts.Models.ViewModels.IndexViewModel
+
+<div class="row col-12 pb-3 m-0 ">
+    @foreach (var product in Model.Products)
+    {
+        <div class="col-lg-3 col-md-6 shadow m-2" style=" border-radius: 7px;">
+            <div class="row ">
+                <div class="col-12 p-1" style=" border-radius: 5px;background-color:white;">
+                    <div class="card" style="border:0px;">
+                        <div class="">
+                            <div class="card-header text-center bg-dark text-white">
+                                @product.Name
+                            </div>
+                            <p class="card-text m-3 " style=" min-height: 180px;">@product.Description</p>
+                            <p class="card-title text-center m-3" style="color:#2c3e50"> @product.Price $CAD</p>
+                        </div>
+                    </div>
+                    <div>
+                        <a asp-action="Details" class="btn btn-primary form-control" asp-route-id="@product.Id">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

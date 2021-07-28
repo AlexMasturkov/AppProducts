@@ -1,0 +1,34 @@
+﻿@model AppProducts.Models.ViewModels.OrderDetailsCart
+
+<form method="post">
+    @if (Model.ShoppingCarts.Count > 0)
+    {
+        <input asp-for="@Model.ShoppingCarts[0].ApplicationUserId" hidden />
+        <div>
+            <div class="container">
+                <div class="card">
+                    <div class="card-header bg-dark text-white ml-0 row container">
+                        <div class="col-6">
+                            Shopping Cart
+                        </div>
+                        <div class="col-6 text-right">
+                            <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-info btn-sm"> Shopping More</a>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @foreach (var item in Model.ShoppingCarts)
+                        {
+                            <div class="row p-1 pt-4 mt-1 shadow-sm">
+                                <div class="col-12 row">
+                                    <h5 class="col-3 text-left">@item.Product.Name</h5>
+                                    <p class="col-6 text-left">@item.Product.Description</p>
+                                    <div class="col-3 text-right">@item.Product.Price CAD$ x @item.Count</div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</form>
